@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║  PROGRAMA ARGOS — El Díptico  (refactorizado)               ║
+║  Archivos:                                                   ║
+║    index.html        ← estructura HTML (este archivo)       ║
+║    argos.css         ← todos los estilos                    ║
+║    data-capitulos.js ← datos de los 8+ capítulos ← EDITAR  ║
+║    data-diagramas.js ← HTML de diagramas custom ← EDITAR   ║
+║    app.js        ← datos del journey panel + render     ║
+║    helpers.js          ← render, modos, navegación, init      ║
+╚══════════════════════════════════════════════════════════════╝
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programa Argos — El Díptico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="argos.css">
+</head>
+<body>
+<!-- § HTML-PORTADA ─────────────────────────────────────────── -->
+<div id="cover">
+  <div id="cover-inner">
+    <p class="cv-badge">ARQUITECTURA DE DATOS · OC-24-1021</p>
+    <p class="cv-prog">Programa</p>
+    <h1 class="cv-title">Argos</h1>
+    <p class="cv-sub">El viaje del dato</p>
+    <div class="cv-line"></div>
+    <p class="cv-desc">Una historia sobre cómo la información operacional se transforma en memoria, decisión y valor para los 1.200+ contratos de alimentación.</p>
+    <button class="cv-btn" onclick="hideCover()">Comenzar la presentación →</button>
+    <p class="cv-meta">1.200 contratos &nbsp;·&nbsp; Arquitectura híbrida ERP → Azure &nbsp;·&nbsp; 48 meses</p>
+  </div>
+</div>
+
+<div id="elena-slide">
+  <div class="elena-wrap">
+    <div class="elena-photo-col">
+      <img class="elena-img" id="es-img" src="maria_desconfiada.png" alt="María" style="filter:grayscale(40%) brightness(.62) contrast(1.2) saturate(.5)">
+      <div class="elena-photo-overlay"></div>
+      <div class="elena-name-tag">
+        <span class="elena-name" style="opacity:1">María</span>
+        <span class="elena-role" style="opacity:1">Ecónoma · Casino industrial · Norte de Chile</span>
+      </div>
+    </div>
+    <div class="elena-story-col">
+      <p class="elena-kicker" style="opacity:1">Programa Argos · Inicio</p>
+      <h2 class="elena-headline es-title" id="es-title" style="opacity:1">La Desconfianza de María</h2>
+      <p class="elena-body" style="opacity:1">María es ecónoma en un casino industrial en el norte de Chile. Lleva siete años en el cargo. Conoce a cada proveedor por nombre, sabe cuánto cuesta el kilo de lomo en cada temporada, y nunca ha dejado a nadie sin almuerzo.<br><br>El fin de semana pasado, la empresa migró 100 contratos al nuevo sistema. El de María no era uno de ellos.<br><br><strong>Hoy es jueves.</strong> El martes hay un evento especial. Y María tiene un problema.</p>
+      <p class="elena-emo-tag" onclick="document.getElementById('elena-slide').classList.remove('es-active','es-title-visible')" style="cursor:pointer;opacity:1">→ continuar</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- § HTML-APP ─────────────────────────────────────────────── -->
+<div id="app" class="mode-both">
+  <header id="hdr">
+    <div id="hdr-brand"><div id="brand-name">Programa Argos</div><div id="brand-sub">El viaje del dato</div></div>
+    <div id="hdr-center"><div id="ch-name"></div><div id="ch-pos"></div></div>
+    <div id="hdr-right">
+      <div id="toggle">
+        <button class="tbt" onclick="setMode('left')">Relato</button>
+        <button class="tbt on" onclick="setMode('both')">Díptico</button>
+        <button class="tbt" onclick="setMode('right')">Técnico</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="slide">
+    <div id="lpanel">
+    <div id="ch10-slide">
+  <div class="ch10-photo">
+    <img src="maria_feliz.jpg" alt="María">
+  </div>
+  <div class="ch10-inner">
+    <div class="ch10-sub">Epílogo · El Desenlace</div>
+    <h1 class="ch10-title">La <span class="des-tachado">Des</span>Confianza<br>de María</h1>
+    <p class="ch10-narr">María participó activamente de la implementación de Argos, estaba bien informada de las nuevas capacidades. Solo señaló su necesidad. Argos <strong>encontró el pedido de 20kg en curso, lo ajustó</strong> e informó a toda la cadena. El lunes, Rolando ya sabe lo que viene antes de levantar la cortina. Una entrega. La cantidad exacta. <strong>Firma y sonríe</strong>.</p>
+  </div>
+</div>
+      <div id="l-watermark"><span></span></div>
+      <div id="l-vignette"></div><div id="l-glow"></div>
+      <div id="ch11-slide">
+  <div class="elena-wrap">
+    <div class="elena-photo-col">
+      <img class="elena-img" src="maria_feliz.jpg" alt="María">
+      <div class="elena-photo-overlay"></div>
+      <div class="elena-name-tag">
+        <span class="elena-name" style="opacity:1">María</span>
+        <span class="elena-role" style="opacity:1">Ecónoma · Casino industrial · Norte de Chile</span>
+      </div>
+    </div>
+    <div class="elena-story-col">
+      <p class="elena-kicker" style="opacity:1">Programa Argos · Cierre</p>
+      <h2 class="elena-headline" style="opacity:1">Lo que estamos<br>construyendo</h2>
+      <p class="elena-body" id="ch11-narr-text" style="opacity:1"></p>
+      <p class="elena-body" id="ch11-narr-close" style="opacity:0;margin-top:1.5rem;font-weight:400;color:rgba(255,255,255,.85)"></p>
+    </div>
+  </div>
+</div>
+
+<div id="l-content">
+        <div id="lch-label"></div><div id="l-time-info"><span id="l-time-hora">—</span><span id="l-time-dur">—</span></div>
+        <div id="emo-word"></div>
+        <div id="atm-rule"></div><div id="atm-text"></div><div id="narr-text"><div id="narr-col1"></div><div id="narr-col2"></div></div>
+        <div id="l-oc-quote"><span class="oq-time"></span><span class="oq-text"></span><span class="oq-tema"></span></div>
+        <div id="ch9-pause">⏪ &nbsp;Pero esto en realidad no pasó.</div>
+        <div id="ch9-fairy" style="display:none">Volvamos al jueves a las 16:45.</div>
+      </div>
+    </div>
+    <div id="jp-negocio"><div class="jp-hdr"><span class="jp-oc-id">OC-24-1021</span><span class="jp-mode-lbl">Negocio</span></div><div id="jp-neg-body"></div></div>
+    <div id="jp-negocio-strip" onclick="toggleJP('neg')"><div id="jp-neg-nums"></div></div>
+    <div id="pdiv"></div>
+    <div id="rpanel">
+      <div id="r-ghosts"></div>
+      <!-- DÍPTICO: texto -->
+      <div id="r-text-wrap">
+        <div id="rch-title" style="display:none"></div>
+        <div class="diptico-grid">
+          <div class="meta">
+            <div class="meta-left-col">
+              <div class="meta-lbl"><span class="meta-lbl-dot tc-dot"></span><i class="fa-solid fa-layer-group"></i> Capacidad habilitante</div>
+              <div id="r-caps" class="meta-tag-row"></div>
+            </div>
+            <div id="r-cap-txt" class="meta-para"></div>
+          </div>
+          <div class="meta">
+            <div class="meta-left-col">
+              <div class="meta-lbl"><span class="meta-lbl-dot tp-dot"></span><i class="fa-solid fa-gavel"></i> Principio rector</div>
+              <div id="r-pris" class="meta-tag-row"></div>
+            </div>
+            <div id="r-pri-txt" class="meta-para"></div>
+          </div>
+          <div class="meta">
+            <div class="meta-left-col">
+              <div class="meta-lbl"><span class="meta-lbl-dot to-dot"></span><i class="fa-solid fa-chart-line"></i> Objetivo de negocio</div>
+              <div id="r-objs" class="meta-tag-row"></div>
+            </div>
+            <div id="r-obj-txt" class="meta-para"></div>
+          </div>
+        </div>
+        <div class="meta" id="r-ins-meta" style="display:none"><div class="meta-left-col"><div class="meta-lbl"><i class="fa-solid fa-lightbulb"></i> Por qué es distinto</div></div><div id="r-ins-txt" class="meta-para ins-txt"></div></div>
+        <div id="insight-box"><div class="ins-lbl"><i class="fa-solid fa-lightbulb"></i> Por qué este valor es distinto</div><div id="ins-txt" class="ins-txt"></div></div>
+      </div>
+      <!-- TÉCNICO: diagrama interactivo -->
+      <div id="r-diagram-wrap">
+        <div id="jp-tecnico-strip" onclick="toggleJP('tec')"><div id="jp-tec-nums"></div></div>
+        <div id="jp-tecnico"><div class="jp-hdr"><span class="jp-oc-id">OC-24-1021</span><span class="jp-mode-lbl">Técnico</span></div><div id="jp-tec-body"></div></div>
+        <div id="journey-panel" style="display:none"><div id="jp-snap"></div><div id="jp-full"></div></div>
+        <div id="r-diag-panel">
+          <div id="r-diag-title"></div>
+          <div id="r-diag-svg"></div>
+          <div id="r-diag-hint">← selecciona un componente para ver su descripción técnica</div>
+          <div id="tecnico-narr"></div>
+        </div>
+        <div id="r-detail-panel">
+          <div id="tech-mode-toggle">
+            <span class="tmt-label">Vista técnica</span>
+            <div class="tmt-btns">
+              <button id="btn-present" class="active" onclick="setTechMode('present')">Presentación</button>
+              <button id="btn-detail" onclick="setTechMode('detail')">Detalle</button>
+            </div>
+          </div>
+          <div class="dp-empty" id="dp-empty"><span class="dp-empty-icon">◈</span>Haz clic en cualquier<br>componente del diagrama</div>
+          <div id="dp-content" style="display:none"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="nav">
+    <button class="nb" id="prev-btn" onclick="go(-1)">← Anterior</button>
+    <div id="dots"></div>
+    <button class="nb" id="next-btn" onclick="handleNext()">Siguiente →</button>
+  </footer>
+
+<div id="map-slide">
+  <div id="map-oc">OC-24-1021 · El viaje del dato</div>
+  <div id="map-slide-inner">
+    <div id="map-stages"></div>
+  </div>
+  <div id="map-progress"></div>
+</div>
+
+  </div>
+  <div class="ec-content">
+    <div class="ec-badge">NuestrEmpresa Chile · Programa Argos</div>
+    <div class="ec-name">María</div>
+    <div class="ec-role">Ecónoma · Contrato Torre Costanera · 3 años en el rol</div>
+    <div class="ec-line"></div>
+    <div class="ec-body">Esta semana el proveedor de carnes la llamó. Hay un requerimiento nuevo de <strong>certificación de origen</strong>.<br><br>El sistema antiguo lo procesaba automáticamente.<br>El nuevo, no.<br><br>Nadie le avisó. Nadie sabe qué más falta.</div>
+    <div class="ec-emo">Desconfianza</div>
+  </div>
+</div>
+<div id="rewind-glitch"><div class="rg-scanlines"></div><div class="rg-bars"></div><div class="rg-vlines"></div><div class="rg-flicker"></div></div>
+  <div class="rl-journey">
+    <div class="rl-j-header">
+      <div class="rl-j-pre">VIAJE DEL PEDIDO</div>
+      <div class="rl-j-id">OC-24-0834</div>
+      <div class="rl-j-sub" id="rl-j-sub"></div>
+    </div>
+    <div class="rl-j-steps" id="rl-j-steps"></div>
+  </div>
+  <div class="rl-content">
+    <div class="rl-ch-lbl" id="rl-ch-lbl"></div>
+    <div class="rl-title" id="rl-title"></div>
+    <div class="rl-narr" id="rl-narr"></div>
+    <div class="rl-quote" id="rl-quote"></div>
+  </div>
+</div>
+
+
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     Scripts — cargar en ESTE ORDEN (hay dependencias)
+     1. data-capitulos  → define CHAPTERS y NC
+     2. data-diagramas  → define CUSTOM_DIAGRAMS
+     3. helpers         → define $, globals, svgNode, svgEdge
+     4. app             → render, init (usa todo lo anterior)
+     ═══════════════════════════════════════════════════ -->
+<script src="data-capitulos.js"></script>
+<script src="data-diagramas.js"></script>
+<script src="helpers.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
